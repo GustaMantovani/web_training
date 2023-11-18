@@ -14,23 +14,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
   <form action="../controller/cad_user.php" method="POST">
     <div>
       <label for="nome">Nome:</label>
-      <input type="text" id="nome" name="nome" required>
+      <input type="text" id="nome" name="txt_nome" required>
     </div>
     <div>
       <label for="login">Login:</label>
-      <input type="text" id="login" name="login" required>
+      <input type="text" id="login" name="txt_login" required>
     </div>
     <div>
       <label for="senha">Senha:</label>
-      <input type="password" id="senha" name="senha" required>
+      <input type="password" id="senha" name="txt_senha1" required>
     </div>
     <div>
       <label for="confirmar_senha">Confirmação de Senha:</label>
-      <input type="password" id="confirmar_senha" name="confirmar_senha" required>
-    </div>
-    <div>
-      <label for="idade">Idade:</label>
-      <input type="number" id="idade" name="idade" required>
+      <input type="password" id="confirmar_senha" name="txt_senha2" required>
     </div>
     <div>
       <input type="submit" value="Cadastrar">
