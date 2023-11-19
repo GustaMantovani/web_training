@@ -6,84 +6,88 @@
  */
 
 function validarNome($nome){
-    $msg = [];
+    $msg = "";
     
     if (empty($nome)){
-        array_push($msg,"Nome vazio");
+        $msg .= "Nome vazio<br>";
     }
     
     else if(!preg_match('~^[ [:alpha:] ]+$~u', $nome)){
-        array_push($msg,"Nome inválido");
+        $msg .= "Nome inválido<br>";
     } 
     return $msg;
 }
 
-function validarLogin($connection,$login){
+function validarLogin($connection, $login){
     require_once '../model/userDBA.php';
-    $msg = [];
+    $msg = "";
     
     if (empty($login)){
-        array_push($msg,"Login vazio");
+        $msg .= "Login vazio<br>";
+    } else {
+        $login = hash('sha256', $login);
+        if (!verificaLoginBanco($connection, $login)){
+            $msg .= "Esse login já existe<br>";
+        }
     }
-    
-    else if (!verificaLoginBanco($connection,$login)){
-        array_push($msg,"Esse login já existe");
-    }
+
+    return $msg;
 }
 
 function validarSenha($senha, $confirmacaoSenha) {
-    $mensagensErro = [];
+    $mensagensErro = "";
 
     // Verifica se a senha tem pelo menos 8 caracteres
     if (strlen($senha) < 6) {
-        array_push($mensagensErro, "A senha deve ter pelo menos 6 caracteres");
+        $mensagensErro .= "A senha deve ter pelo menos 6 caracteres<br>";
     } else {
         // Verifica se a senha contém pelo menos uma letra maiúscula
         if (!preg_match('/[A-Z]/', $senha)) {
-            array_push($mensagensErro, "A senha deve conter pelo menos uma letra maiúscula");
+            $mensagensErro .= "A senha deve conter pelo menos uma letra maiúscula<br>";
         }
 
         // Verifica se a senha contém pelo menos uma letra minúscula
         if (!preg_match('/[a-z]/', $senha)) {
-            array_push($mensagensErro, "A senha deve conter pelo menos uma letra minúscula");
+            $mensagensErro .= "A senha deve conter pelo menos uma letra minúscula<br>";
         }
 
         // Verifica se a senha contém pelo menos um número
         if (!preg_match('/[0-9]/', $senha)) {
-            array_push($mensagensErro, "A senha deve conter pelo menos um número");
+            $mensagensErro .= "A senha deve conter pelo menos um número<br>";
         }
     }
 
     // Verifica se as senhas são iguais
     if ($senha !== $confirmacaoSenha) {
-        array_push($mensagensErro, "As senhas não coincidem");
+        $mensagensErro .= "As senhas não coincidem<br>";
     }
 
-    // Retorna o array de mensagens de erro
+    // Retorna a string de mensagens de erro
     return $mensagensErro;
 }
 
-function validarCamposFormCadUsr($connection,$nome, $login, $senha, $confirmacaoSenha) {
-    $mensagensErro = [];
+function validarCamposFormCadUsr($connection, $nome, $login, $senha, $confirmacaoSenha) {
+    $mensagensErro = "";
 
     // Validação do nome
     $validacaoNome = validarNome($nome);
     if (!empty($validacaoNome)) {
-        $mensagensErro = array_merge($mensagensErro, $validacaoNome);
+        $mensagensErro .= $validacaoNome;
     }
 
     // Validação do login
-    $validacaoLogin = validarLogin($connection,$login);
+    $validacaoLogin = validarLogin($connection, $login);
     if (!empty($validacaoLogin)) {
-        $mensagensErro = array_merge($mensagensErro, $validacaoLogin);
+        $mensagensErro .= $validacaoLogin;
     }
 
     // Validação da senha
     $validacaoSenha = validarSenha($senha, $confirmacaoSenha);
     if (!empty($validacaoSenha)) {
-        $mensagensErro = array_merge($mensagensErro, $validacaoSenha);
+        $mensagensErro .= $validacaoSenha;
     }
 
-    // Retorna o array de mensagens de erro
+    // Retorna a string de mensagens de erro
     return $mensagensErro;
 }
+

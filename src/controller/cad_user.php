@@ -13,7 +13,7 @@ $connection = connection();
 
 //Receber os dados do formulário de cadastro
 
-$msg = []; //Variável que armazena as strings de mensagem de resposta
+$msg = ""; //Variável que armazena as strings de mensagem de resposta
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") { // Verifica se o formulário foi submetido
@@ -23,10 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Verifica se o formulário foi sub
     $senha2 = mysqli_real_escape_string($connection, htmlspecialchars(trim($_POST["txt_senha2"]), ENT_QUOTES, 'UTF-8'));
     
     $msg = validarCamposFormCadUsr($connection,$nome,$login,$senha1,$senha2);
-    echo "teste muito foda";
-    foreach ($msg as $error){
-        echo $error;
-    }
 
     if(empty($msg)){
         
@@ -34,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Verifica se o formulário foi sub
         mysqli_close($connection);
         echo "Cadastrou";
     }else{
-        //header("Location: ../vision/cad_form.php?msg=$msg");
+        header("Location: ../vision/cad_form.php?msg=$msg");
     }
 } else {
     header("Location: ../vision/cad_form.php");

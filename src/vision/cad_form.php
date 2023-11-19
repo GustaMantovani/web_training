@@ -31,6 +31,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     <div>
       <input type="submit" value="Cadastrar">
     </div>
+      <?php 
+        if(isset($_GET['msg'])){
+            $msg = $_GET['msg'];
+            echo $msg;
+        }
+      ?>
   </form>
 </body>
 </html>
