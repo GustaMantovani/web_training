@@ -30,3 +30,9 @@ function cadastrarUsuario($connection,$nome,$login,$senha,$idade){
     
     mysqli_query($connection,$query) or die (mysqli_error($connection));
 }
+
+function pesqUserPorLogin($connection,$login){
+    $query = "SELECT * FROM user WHERE login = '$login'";
+    $result = mysqli_query($connection, $query) or die(mysqli_errno($connection));
+    return $result;
+}

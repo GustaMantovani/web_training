@@ -18,9 +18,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $senha = mysqli_real_escape_string($connection, htmlspecialchars(trim($_POST["txt_senha"]), ENT_QUOTES, 'UTF-8'));
     
     $msg .= validarCamposFormLoginUsr($login,$senha);
-    //$msg .= validarUsuario($connection,$login,$senha);
-
-   echo $msg;
+   
+   if(empty($msg)){
+       $login = hash('sha256', $login);
+       $resultLoginQuery = pesqUserPorLogin($connection,$login);
+       if(mysqli_num_rows($resultLoginQuery)==1){
+           $userData = mysqli_fetch_assoc($resultLoginQuery);
+           if(password_verify($senha,$userData['senha'])){
+               session_start();
+               $_SESSION['user']=$userData['name']; 
+               echo $_SESSION['user'];
+           }else{
+                echo "Login ou senha inválidos";
+           }
+       }else{
+           echo "Login ou senha inválidos";
+       }
+   }else{
+       echo $msg;
+   }
+   mysqli_close($connection);
 } else {
     header("Location: ../vision/login.php");
 }

@@ -18,10 +18,10 @@ function validarNome($nome){
     return $msg;
 }
 
-function validarLogin($connection, $login){
+function validarLogin($login){
     $msg = "";
     
-    if (emfpty($login)){
+    if (empty($login)){
         $msg .= "Login vazio<br>";
     } 
 
@@ -70,7 +70,7 @@ function validarCamposFormCadUsr($connection, $nome, $login, $senha, $confirmaca
     }
 
     // Validação do login
-    $validacaoLogin = validarLogin($connection, $login);
+    $validacaoLogin = validarLogin($login);
     if (!empty($validacaoLogin)) {
         $login = hash('sha256', $login);
         if (verificaLoginBanco($connection, $login)){
@@ -89,11 +89,11 @@ function validarCamposFormCadUsr($connection, $nome, $login, $senha, $confirmaca
     return $mensagensErro;
 }
 
-function validarCamposFormLoginUsr($connection, $nome, $login, $senha, $confirmacaoSenha) {
+function validarCamposFormLoginUsr($login, $senha) {
     $mensagensErro = "";
 
     // Validação do login
-    $validacaoLogin = validarLogin($connection, $login);
+    $validacaoLogin = validarLogin($login);
     if (!empty($validacaoLogin)) {
         $mensagensErro .= $validacaoLogin;
     }
@@ -102,6 +102,7 @@ function validarCamposFormLoginUsr($connection, $nome, $login, $senha, $confirma
     $validacaoSenha = validarSenha($senha, $senha);
     if (!empty($validacaoSenha)) {
         $mensagensErro .= $validacaoSenha;
+        
     }
 
     // Retorna a string de mensagens de erro
