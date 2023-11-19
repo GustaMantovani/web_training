@@ -19,17 +19,11 @@ function validarNome($nome){
 }
 
 function validarLogin($connection, $login){
-    require_once '../model/userDBA.php';
     $msg = "";
     
-    if (empty($login)){
+    if (emfpty($login)){
         $msg .= "Login vazio<br>";
-    } else {
-        $login = hash('sha256', $login);
-        if (verificaLoginBanco($connection, $login)){
-            $msg .= "Esse login já existe<br>";
-        }
-    }
+    } 
 
     return $msg;
 }
@@ -78,6 +72,10 @@ function validarCamposFormCadUsr($connection, $nome, $login, $senha, $confirmaca
     // Validação do login
     $validacaoLogin = validarLogin($connection, $login);
     if (!empty($validacaoLogin)) {
+        $login = hash('sha256', $login);
+        if (verificaLoginBanco($connection, $login)){
+            $msg .= "Esse login já existe<br>";
+        }
         $mensagensErro .= $validacaoLogin;
     }
 
@@ -90,4 +88,25 @@ function validarCamposFormCadUsr($connection, $nome, $login, $senha, $confirmaca
     // Retorna a string de mensagens de erro
     return $mensagensErro;
 }
+
+function validarCamposFormLoginUsr($connection, $nome, $login, $senha, $confirmacaoSenha) {
+    $mensagensErro = "";
+
+    // Validação do login
+    $validacaoLogin = validarLogin($connection, $login);
+    if (!empty($validacaoLogin)) {
+        $mensagensErro .= $validacaoLogin;
+    }
+
+    // Validação da senha
+    $validacaoSenha = validarSenha($senha, $senha);
+    if (!empty($validacaoSenha)) {
+        $mensagensErro .= $validacaoSenha;
+    }
+
+    // Retorna a string de mensagens de erro
+    return $mensagensErro;
+}
+
+
 

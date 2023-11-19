@@ -25,7 +25,6 @@ function cadastrarUsuario($connection,$nome,$login,$senha,$idade){
     $id = hash('sha256', $idTimeStampSeed);
     $login = hash('sha256', $login);
     $senha = password_hash($senha, PASSWORD_DEFAULT);
-    
 
     $query = "INSERT INTO user (iduser,insertdate,name,login,senha) VALUES ('$id','$dataHoraAtual','$nome','$login','$senha')";
     
