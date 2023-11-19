@@ -9,10 +9,11 @@ function verificaLoginBanco($connection,$login){
     $query = "SELECT * FROM user WHERE login = '$login'";
     
     $registro = mysqli_query($connection, $query) or die(mysqli_errno($connection));
-    if(isset($registro)){
+    if(mysqli_num_rows($registro)>0){
         mysqli_free_result($registro);
         return true;
     }else{
+        mysqli_free_result($registro);
         return false;
     }
 }
@@ -22,7 +23,9 @@ function cadastrarUsuario($connection,$nome,$login,$senha,$idade){
     $idTimeStampSeed = (string) time();
     
     $id = hash('sha256', $idTimeStampSeed);
+    $login = hash('sha256', $login);
     $senha = password_hash($senha, PASSWORD_DEFAULT);
+    
 
     $query = "INSERT INTO user (iduser,insertdate,name,login,senha) VALUES ('$id','$dataHoraAtual','$nome','$login','$senha')";
     

@@ -26,7 +26,7 @@ function validarLogin($connection, $login){
         $msg .= "Login vazio<br>";
     } else {
         $login = hash('sha256', $login);
-        if (!verificaLoginBanco($connection, $login)){
+        if (verificaLoginBanco($connection, $login)){
             $msg .= "Esse login já existe<br>";
         }
     }
