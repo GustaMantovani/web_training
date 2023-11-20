@@ -22,14 +22,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $msg .= validarCamposFormCadUsr($connection,$nome,$login,$senha1,$senha2);
 
     if(empty($msg)){
-        
         cadastrarUsuario($connection,$nome,$login,$senha1,$senha2);
-        mysqli_close($connection);
         echo "Cadastrou";
     }else{
-        mysqli_close($connection);
         header("Location: ../vision/cad_form.php?msg=$msg");
     }
+    mysqli_close($connection);
 } else {
     header("Location: ../vision/cad_form.php");
 }

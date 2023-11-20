@@ -26,14 +26,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
            $userData = mysqli_fetch_assoc($resultLoginQuery);
            if(password_verify($senha,$userData['senha'])){
                session_start();
-               $_SESSION['user']=$userData['name']; 
-               echo $_SESSION['user'];
+               $_SESSION['id_sessao'] = $userData['iduser'];
+               $_SESSION['nome_sessao'] = $userData['name'];
+               
+               header("Location: ../vision/panel.php");
            }else{
                 echo "Login ou senha inválidos";
            }
        }else{
            echo "Login ou senha inválidos";
        }
+       mysqli_free_result($resultLoginQuery);
    }else{
        echo $msg;
    }
