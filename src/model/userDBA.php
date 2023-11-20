@@ -36,3 +36,9 @@ function pesqUserPorLogin($connection,$login){
     $result = mysqli_query($connection, $query) or die(mysqli_errno($connection));
     return $result;
 }
+
+function getNames($connection,$n){
+    $query = "SELECT name FROM user LIMIT $n";
+    $result = mysqli_query($connection, $query);
+    return $result; 
+}
