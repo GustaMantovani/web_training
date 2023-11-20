@@ -74,7 +74,7 @@ function validarCamposFormCadUsr($connection, $nome, $login, $senha, $confirmaca
     if (!empty($validacaoLogin)) {
         $login = hash('sha256', $login);
         if (verificaLoginBanco($connection, $login)){
-            $msg .= "Esse login já existe<br>";
+            $mensagensErro .= "Esse login já existe<br>";
         }
         $mensagensErro .= $validacaoLogin;
     }

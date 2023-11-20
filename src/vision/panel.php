@@ -11,11 +11,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     <body>
         <?php
             session_start();
-            echo $_SESSION['nome_sessao']."<br>";
-            echo $_SESSION['id_sessao']."<br>";
-            echo "<br>";
-            
-            
+            if(isset($_SESSION['nome_sessao']) && isset($_SESSION['id_sessao'])){
+                echo $_SESSION['nome_sessao']."<br>";
+                echo $_SESSION['id_sessao']."<br>";
+                echo "<br>";
+            }
+
             require_once '../connection/db_connection.php';
             require_once '../model/userDBA.php';
             
