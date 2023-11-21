@@ -23,11 +23,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             $connection = connection();
             
             $resultGetNames = getNames($connection, 50);
-            
+            mysqli_close($connection);
             while ($rowResutGetName=mysqli_fetch_assoc($resultGetNames)){
                 echo $rowResutGetName['name']."<br>";
             }
-            
         ?>
     </body>
 </html>
