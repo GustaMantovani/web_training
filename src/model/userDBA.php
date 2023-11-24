@@ -6,7 +6,7 @@
  */
 
 function verificaLoginBanco($connection,$login){
-    $query = "SELECT * FROM user WHERE login = '$login'";
+    $query = "SELECT login FROM user WHERE login = '$login'";
     
     $registro = mysqli_query($connection, $query) or die(mysqli_errno($connection));
     if(mysqli_num_rows($registro)>0){
