@@ -1,0 +1,9 @@
+Este é um projeto simples de cadastro e login de usuários em PHP foi desenvolvido como um exemplo prático para demonstrar conceitos e boas práticas de segurança e desenvolvimento web. O código apresentado aqui é uma amostra que enfatiza várias práticas técnicas essenciais para a segurança e funcionalidade de uma aplicação web.
+
+Ao longo do desenvolvimento, foram aplicadas diversas medidas de segurança para proteger as informações e prevenir possíveis vulnerabilidades. Uma dessas medidas inclui a sanitização de entradas do usuário, utilizando funções como mysqli_real_escape_string e htmlspecialchars para evitar ataques de injeção de SQL e XSS (Cross-Site Scripting), respectivamente. Isso garante que os dados inseridos pelos usuários sejam tratados de forma segura antes de serem utilizados na aplicação.
+
+Além disso, o armazenamento de senhas foi tratado com segurança por meio do uso da função password_hash para criptografar as senhas antes de serem armazenadas no banco de dados. Isso proporciona uma camada adicional de proteção, garantindo que as senhas dos usuários não sejam armazenadas em texto simples, mas sim como hashes criptografados.
+
+Outra prática importante foi a utilização de consultas (queries) otimizadas ao banco de dados, buscando retornar apenas as informações essenciais necessárias para a aplicação. Isso ajuda a reduzir o risco de vazamento de dados e melhora a eficiência do sistema, minimizando a quantidade de informações trafegadas entre o banco de dados e a aplicação.
+
+No que diz respeito à autenticação, este projeto implementou um sistema de sessões HTTP para validar o acesso dos usuários. Utilizou-se a função session_start() para iniciar a sessão e armazenar informações relevantes do usuário após a autenticação bem-sucedida, como o ID do usuário e o nome, utilizando $_SESSION. Isso garante uma forma segura de manter o estado da sessão do usuário durante a navegação na aplicação.
