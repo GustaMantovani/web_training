@@ -1,10 +1,5 @@
 <?php
 
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
- */
-
 function verificaLoginBanco($connection,$login){
     $query = "SELECT login FROM user WHERE login = '$login'";
     
@@ -18,7 +13,7 @@ function verificaLoginBanco($connection,$login){
     }
 }
 
-function cadastrarUsuario($connection,$nome,$login,$senha,$idade){
+function cadastrarUsuario($connection,$nome,$login,$senha){
     $dataHoraAtual = date("Y-m-d H:i:s");
     $idTimeStampSeed = (string) time();
     

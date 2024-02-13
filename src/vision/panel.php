@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to edit this template
--->
 <html>
     <head>
         <meta charset="UTF-8">
@@ -15,7 +11,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 echo $_SESSION['nome_sessao']."<br>";
                 echo $_SESSION['id_sessao']."<br>";
                 echo "<br>";
-            
 
                 require_once '../connection/db_connection.php';
                 require_once '../model/userDBA.php';
@@ -28,7 +23,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     echo $rowResutGetName['name']."<br>";
                 }
             }else{
-                echo "Usuário não logado";
+                echo "Usuário não logado";   
             }
         ?>
     </body>
